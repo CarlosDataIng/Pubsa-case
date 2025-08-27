@@ -19,10 +19,8 @@ def parse_csv(element):
         reader = csv.reader(io.StringIO(element), delimiter='\t')
         fields = next(reader)
         
-        if len(fields) != 29: # <-- CORRECCIÓN: Ahora esperamos 29 columnas
+        if len(fields) != 29:
             raise ValueError(f"Se esperaban 29 columnas, pero se encontraron {len(fields)}")
-
-        # <-- CORRECCIÓN: Se añaden las 2 columnas extra (Z_CostContact, Z_Revenue)
         (id, year_birth, education, marital_status, income, kidhome, teenhome, 
          dt_customer, recency, mnt_wines, mnt_fruits, mnt_meat, mnt_fish, 
          mnt_sweet, mnt_gold, num_deals_purchases, num_web_purchases, 
@@ -57,8 +55,8 @@ def parse_csv(element):
             'AcceptedCmp4': int(accepted_cmp4),
             'AcceptedCmp5': int(accepted_cmp5),
             'Complain': int(complain),
-            'Z_CostContact': int(z_cost_contact), # <-- CAMPO NUEVO
-            'Z_Revenue': int(z_revenue),       # <-- CAMPO NUEVO
+            'Z_CostContact': int(z_cost_contact), 
+            'Z_Revenue': int(z_revenue),       
             'Response': int(response)
         }
     except Exception as e:
@@ -91,7 +89,7 @@ def run():
         region='us-central1'
     )
     
-    # <-- CORRECCIÓN: Se añaden las 2 columnas extra al esquema de la tabla
+
     table_schema = (
         'ID:INTEGER, Year_Birth:INTEGER, Education:STRING, Marital_Status:STRING, '
         'Income:FLOAT, Kidhome:INTEGER, Teenhome:INTEGER, Dt_Customer:STRING, '
@@ -101,7 +99,6 @@ def run():
         'NumStorePurchases:INTEGER, NumWebVisitsMonth:INTEGER, AcceptedCmp1:INTEGER, '
         'AcceptedCmp2:INTEGER, AcceptedCmp3:INTEGER, AcceptedCmp4:INTEGER, '
         'AcceptedCmp5:INTEGER, Complain:INTEGER, Z_CostContact:INTEGER, Z_Revenue:INTEGER, Response:INTEGER, '
-        # Nuevas columnas de Feature Engineering
         'Customer_Age:INTEGER, Total_Children:INTEGER, Total_Spend:INTEGER, Has_Complained:BOOLEAN'
     )
 
