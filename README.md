@@ -1,2 +1,6 @@
 # Pubsa-case
-Pipelines para Análisis de Sentimiento y Segmentación de clientes
+Pipeline de Segmentación de clientes
+
+Código de Dataflow es marketing_pipeline.py
+
+
